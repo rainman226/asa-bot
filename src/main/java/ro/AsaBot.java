@@ -9,8 +9,11 @@ import net.dv8tion.jda.api.OnlineStatus;
 import net.dv8tion.jda.api.entities.Activity;
 import net.dv8tion.jda.api.requests.GatewayIntent;
 import ro.commands.BluntCommand;
+import ro.music.commands.PlayCmd;
+import ro.music.commands.SkipCmd;
+import ro.music.dj.VolumeCmd;
+import ro.settings.SettingsManager;
 
-import java.awt.*;
 import java.util.Arrays;
 
 public class AsaBot {
@@ -23,8 +26,9 @@ public class AsaBot {
 
     private static void startBot(String token) {
         EventWaiter waiter = new EventWaiter();
-        Bot bot = new Bot(waiter);
-        CommandClient client = createCommandClient(bot);
+        SettingsManager settings = new SettingsManager();
+        Bot bot = new Bot(waiter, settings);
+        CommandClient client = createCommandClient(bot, settings);
 
         try {
             JDA jda = JDABuilder.create(token, Arrays.asList(INTENTS))
@@ -39,14 +43,20 @@ public class AsaBot {
         }
     }
 
-    private static CommandClient createCommandClient(Bot bot) {
+    private static CommandClient createCommandClient(Bot bot, SettingsManager settings) {
         CommandClientBuilder cb = new CommandClientBuilder()
                 .setPrefix("!")
                 .setOwnerId("240159759670575104")
                 .setEmojis("\uD83D\uDE03", "\uD83D\uDE2E", "\uD83D\uDE26")
                 .setHelpWord("help")
+                .setGuildSettingsManager(settings)
                 .addCommands(
-                        new BluntCommand()
+                        new BluntCommand(),
+
+                        new PlayCmd(bot),
+                        new SkipCmd(bot),
+
+                        new VolumeCmd(bot)
                 );
 
         return cb.build();

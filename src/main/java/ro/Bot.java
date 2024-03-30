@@ -2,14 +2,34 @@ package ro;
 
 import com.jagrosh.jdautilities.commons.waiter.EventWaiter;
 import net.dv8tion.jda.api.JDA;
+import net.dv8tion.jda.api.entities.Guild;
+import ro.music.audio.NowPlayingHandler;
+import ro.music.audio.PlayerManager;
+import ro.music.playlist.PlaylistLoader;
+import ro.settings.SettingsManager;
+
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
 
 public class Bot {
     private final EventWaiter waiter;
+    private final ScheduledExecutorService threadpool;
+    private final SettingsManager settings;
+    private final PlayerManager players;
+    private final PlaylistLoader playlists;
+    private final NowPlayingHandler nowplaying;
 
     private JDA jda;
 
-    public Bot(EventWaiter waiter) {
+    public Bot(EventWaiter waiter, SettingsManager settings) {
         this.waiter = waiter;
+        this.threadpool = Executors.newSingleThreadScheduledExecutor();
+        this.settings = settings;
+        this.players = new PlayerManager(this);
+        this.players.init();
+        this.playlists = new PlaylistLoader();
+        this.nowplaying = new NowPlayingHandler(this);
+        this.nowplaying.init();
     }
 
     public EventWaiter getWaiter() {
@@ -40,6 +60,41 @@ public class Bot {
 //            gui.dispose();
 //        System.exit(0);
 //    }
+
+    public SettingsManager getSettingsManager() {
+        return settings;
+    }
+
+    public PlaylistLoader getPlaylistLoader() {
+        return playlists;
+    }
+
+    public ScheduledExecutorService getThreadpool()
+    {
+        return threadpool;
+    }
+
+    public NowPlayingHandler getNowplayingHandler()
+    {
+        return nowplaying;
+    }
+
+    public JDA getJDA()
+    {
+        return jda;
+    }
+
+    public PlayerManager getPlayerManager()
+    {
+        return players;
+    }
+
+    public void closeAudioConnection(long guildId)
+    {
+        Guild guild = jda.getGuildById(guildId);
+        if(guild!=null)
+            threadpool.submit(() -> guild.getAudioManager().closeAudioConnection());
+    }
 
     public void setJDA(JDA jda) {
         this.jda = jda;
