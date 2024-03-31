@@ -9,8 +9,11 @@ import net.dv8tion.jda.api.OnlineStatus;
 import net.dv8tion.jda.api.entities.Activity;
 import net.dv8tion.jda.api.requests.GatewayIntent;
 import ro.commands.BluntCommand;
+import ro.commands.SammyCommand;
+import ro.music.commands.NowPlayingCmd;
 import ro.music.commands.PlayCmd;
 import ro.music.commands.SkipCmd;
+import ro.music.commands.StopCmd;
 import ro.music.dj.VolumeCmd;
 import ro.settings.SettingsManager;
 
@@ -52,9 +55,12 @@ public class AsaBot {
                 .setGuildSettingsManager(settings)
                 .addCommands(
                         new BluntCommand(),
+                        new SammyCommand(),
 
                         new PlayCmd(bot),
                         new SkipCmd(bot),
+                        new StopCmd(bot),
+                        new NowPlayingCmd(bot),
 
                         new VolumeCmd(bot)
                 );
