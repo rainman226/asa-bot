@@ -10,10 +10,7 @@ import net.dv8tion.jda.api.entities.Activity;
 import net.dv8tion.jda.api.requests.GatewayIntent;
 import ro.commands.BluntCommand;
 import ro.commands.SammyCommand;
-import ro.music.commands.NowPlayingCmd;
-import ro.music.commands.PlayCmd;
-import ro.music.commands.SkipCmd;
-import ro.music.commands.StopCmd;
+import ro.music.commands.*;
 import ro.music.dj.VolumeCmd;
 import ro.settings.SettingsManager;
 
@@ -60,6 +57,8 @@ public class AsaBot {
                         new PlayCmd(bot),
                         new SkipCmd(bot),
                         new StopCmd(bot),
+                        new QueueCmd(bot),
+                        new ShuffleCmd(bot),
                         new NowPlayingCmd(bot),
 
                         new VolumeCmd(bot)
