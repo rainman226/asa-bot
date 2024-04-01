@@ -11,7 +11,7 @@ import net.dv8tion.jda.api.requests.GatewayIntent;
 import ro.commands.BluntCommand;
 import ro.commands.SammyCommand;
 import ro.music.commands.*;
-import ro.music.dj.VolumeCmd;
+import ro.music.controllcmds.*;
 import ro.settings.SettingsManager;
 
 import java.util.Arrays;
@@ -63,7 +63,11 @@ public class AsaBot {
                         new SearchCmd(bot),
                         new RemoveCmd(bot),
 
-                        new VolumeCmd(bot)
+                        new VolumeCmd(bot),
+                        new PauseCmd(bot),
+                        new PlayNextCmd(bot),
+                        new RepeatCmd(bot),
+                        new MoveTrackCmd(bot)
                 );
 
         return cb.build();

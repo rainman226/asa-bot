@@ -1,4 +1,4 @@
-package ro.music.dj;
+package ro.music.controllcmds;
 
 import com.jagrosh.jdautilities.command.CommandEvent;
 import ro.Bot;
