@@ -60,6 +60,8 @@ public class AsaBot {
                         new QueueCmd(bot),
                         new ShuffleCmd(bot),
                         new NowPlayingCmd(bot),
+                        new SearchCmd(bot),
+                        new RemoveCmd(bot),
 
                         new VolumeCmd(bot)
                 );
