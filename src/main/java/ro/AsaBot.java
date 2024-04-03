@@ -8,6 +8,7 @@ import net.dv8tion.jda.api.JDABuilder;
 import net.dv8tion.jda.api.OnlineStatus;
 import net.dv8tion.jda.api.entities.Activity;
 import net.dv8tion.jda.api.requests.GatewayIntent;
+import ro.commands.AsaCmd;
 import ro.commands.BluntCommand;
 import ro.commands.SammyCommand;
 import ro.music.commands.*;
@@ -53,6 +54,7 @@ public class AsaBot {
                 .addCommands(
                         new BluntCommand(),
                         new SammyCommand(),
+                        new AsaCmd(),
 
                         new PlayCmd(bot),
                         new SkipCmd(bot),
