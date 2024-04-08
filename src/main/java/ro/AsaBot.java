@@ -10,6 +10,7 @@ import net.dv8tion.jda.api.entities.Activity;
 import net.dv8tion.jda.api.requests.GatewayIntent;
 import ro.commands.AsaCmd;
 import ro.commands.BluntCommand;
+import ro.commands.Forbidden;
 import ro.commands.SammyCommand;
 import ro.music.commands.*;
 import ro.music.controllcmds.*;
@@ -55,6 +56,7 @@ public class AsaBot {
                         new BluntCommand(),
                         new SammyCommand(),
                         new AsaCmd(),
+                        new Forbidden(bot),
 
                         new PlayCmd(bot),
                         new SkipCmd(bot),

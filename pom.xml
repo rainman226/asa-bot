@@ -7,7 +7,7 @@
     <groupId>ro</groupId>
     <artifactId>AsaBot</artifactId>
     <version>1.0-SNAPSHOT</version>
-    <packaging>jar</packaging>
+    <packaging>pom</packaging>
 
     <repositories>
         <repository>
@@ -87,6 +87,13 @@
             <artifactId>jsoup</artifactId>
             <version>1.15.3</version>
         </dependency>
+        <!-- https://mvnrepository.com/artifact/com.google.code.gson/gson -->
+        <dependency>
+            <groupId>com.google.code.gson</groupId>
+            <artifactId>gson</artifactId>
+            <version>2.10.1</version>
+        </dependency>
+
 
         <!-- Testing Dependencies -->
         <dependency>
@@ -117,7 +124,10 @@
             <artifactId>imageboard-api</artifactId>
             <version>2.6.1.1</version>
         </dependency>
+
     </dependencies>
+
+
 
     <build>
         <defaultGoal>clean package</defaultGoal>
