@@ -2,9 +2,9 @@ package ro.music.controllcmds;
 
 import com.jagrosh.jdautilities.command.CommandEvent;
 import ro.Bot;
+import ro.music.DJCommand;
 import ro.music.audio.AudioHandler;
 import ro.music.audio.QueuedTrack;
-import ro.music.DJCommand;
 import ro.music.queue.AbstractQueue;
 
 public class MoveTrackCmd extends DJCommand

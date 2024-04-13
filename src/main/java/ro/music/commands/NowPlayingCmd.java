@@ -1,13 +1,11 @@
 package ro.music.commands;
 
 import com.jagrosh.jdautilities.command.CommandEvent;
-import net.dv8tion.jda.api.entities.MessageEmbed;
+import net.dv8tion.jda.api.Permission;
 import net.dv8tion.jda.api.utils.messages.MessageCreateData;
 import ro.Bot;
-import ro.music.audio.AudioHandler;
 import ro.music.MusicCommand;
-import net.dv8tion.jda.api.Permission;
-import net.dv8tion.jda.api.entities.Message;
+import ro.music.audio.AudioHandler;
 
 public class NowPlayingCmd extends MusicCommand
 {

@@ -1,10 +1,10 @@
 package ro.music;
 
 import com.jagrosh.jdautilities.command.CommandEvent;
-import ro.Bot;
-import ro.settings.Settings;
 import net.dv8tion.jda.api.Permission;
 import net.dv8tion.jda.api.entities.Role;
+import ro.Bot;
+import ro.settings.Settings;
 
 public abstract class DJCommand extends MusicCommand
 {

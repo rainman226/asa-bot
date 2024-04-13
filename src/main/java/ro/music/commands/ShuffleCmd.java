@@ -2,8 +2,8 @@ package ro.music.commands;
 
 import com.jagrosh.jdautilities.command.CommandEvent;
 import ro.Bot;
-import ro.music.audio.AudioHandler;
 import ro.music.MusicCommand;
+import ro.music.audio.AudioHandler;
 public class ShuffleCmd extends MusicCommand
 {
     public ShuffleCmd(Bot bot)

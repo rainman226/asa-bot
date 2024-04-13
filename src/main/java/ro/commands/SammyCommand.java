@@ -2,7 +2,6 @@ package ro.commands;
 
 import com.jagrosh.jdautilities.command.Command;
 import com.jagrosh.jdautilities.command.CommandEvent;
-import net.dv8tion.jda.api.utils.messages.MessageCreateData;
 
 public class SammyCommand extends Command {
     public SammyCommand() {

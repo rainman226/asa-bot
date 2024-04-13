@@ -1,23 +1,22 @@
 package ro.music.commands;
 
-import java.util.List;
-import java.util.concurrent.TimeUnit;
 import com.jagrosh.jdautilities.command.CommandEvent;
 import com.jagrosh.jdautilities.menu.Paginator;
-import net.dv8tion.jda.api.entities.MessageEmbed;
+import net.dv8tion.jda.api.Permission;
+import net.dv8tion.jda.api.exceptions.PermissionException;
 import net.dv8tion.jda.api.utils.messages.MessageCreateBuilder;
 import net.dv8tion.jda.api.utils.messages.MessageCreateData;
 import ro.Bot;
+import ro.music.MusicCommand;
 import ro.music.audio.AudioHandler;
 import ro.music.audio.QueuedTrack;
-import ro.music.MusicCommand;
 import ro.settings.QueueType;
 import ro.settings.RepeatMode;
 import ro.settings.Settings;
 import ro.utils.FormatUtil;
-import net.dv8tion.jda.api.Permission;
-import net.dv8tion.jda.api.entities.Message;
-import net.dv8tion.jda.api.exceptions.PermissionException;
+
+import java.util.List;
+import java.util.concurrent.TimeUnit;
 public class QueueCmd extends MusicCommand
 {
     private final Paginator.Builder builder;

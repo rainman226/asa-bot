@@ -2,13 +2,13 @@ package ro.music;
 
 import com.jagrosh.jdautilities.command.Command;
 import com.jagrosh.jdautilities.command.CommandEvent;
-import ro.Bot;
-import ro.settings.Settings;
-import ro.music.audio.AudioHandler;
 import net.dv8tion.jda.api.entities.GuildVoiceState;
 import net.dv8tion.jda.api.entities.channel.concrete.TextChannel;
 import net.dv8tion.jda.api.entities.channel.concrete.VoiceChannel;
 import net.dv8tion.jda.api.exceptions.PermissionException;
+import ro.Bot;
+import ro.music.audio.AudioHandler;
+import ro.settings.Settings;
 
 
 public abstract class MusicCommand extends Command
