@@ -28,9 +28,7 @@ public class AsaCmd extends Command {
             });
         } catch (Exception e) {
             e.printStackTrace();
-            imgBoard.search(MAX_LIMIT, "mitaka_asa").async(images -> {
-                event.reply(images.get(new Random().nextInt(images.size())).getURL());
-            });
+            event.reply("An error occurred while fetching the image");
         }
     }
 }

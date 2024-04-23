@@ -30,31 +30,32 @@ public class Forbidden extends Command {
 
     private final Bot bot;
 
-    private List<String> images;
-
     public Forbidden(Bot bot) {
         this.bot = bot;
         this.name = "forbidden";
-        this.help = "You are not allowed to use this command!";
+        //this.help = "You are not allowed to use this command!";
         this.arguments = "<person>";
         this.guildOnly = false;
+        this.nsfwOnly = true;
+        this.hidden = true;
     }
 
     protected void execute(CommandEvent event) {
         try {
             List<JCM.Person> searchResults = search(URLEncoder.encode(event.getArgs(), "UTF-8"));
-            images = getImages(searchResults.get(0));
+            List<String> images = getImages(searchResults.get(0));
 
             if (!images.isEmpty()) {
                 String initialImageUrl = images.get(0);
-                sendInitialMessage(event.getChannel(), initialImageUrl);
+                sendInitialMessage(event.getChannel(), initialImageUrl, images);
             }
         } catch (Exception e) {
             e.printStackTrace();
+            event.reply("Wrong name mate! Retry!");
         }
     }
 
-    private void sendInitialMessage(MessageChannel channel, String imageUrl) {
+    private void sendInitialMessage(MessageChannel channel, String imageUrl, List<String> images) {
         EmbedBuilder embedBuilder = new EmbedBuilder();
         embedBuilder.setTitle("Initial Image");
         embedBuilder.setImage(imageUrl);
@@ -68,7 +69,7 @@ public class Forbidden extends Command {
                 .build();
 
         channel.sendMessage(messageData).queue(message -> {
-            ButtonListener buttonListener = new ButtonListener();
+            ButtonListener buttonListener = new ButtonListener(images);
             bot.getJDA().addEventListener(buttonListener);
 
             ScheduledExecutorService scheduler = Executors.newScheduledThreadPool(1);
@@ -81,7 +82,13 @@ public class Forbidden extends Command {
 
     }
 
-    public class ButtonListener extends ListenerAdapter {
+    public static class ButtonListener extends ListenerAdapter {
+        private final List<String> images;
+
+        public ButtonListener(List<String> images) {
+            this.images = images;
+        }
+
         @Override
         public void onButtonInteraction(ButtonInteractionEvent event) {
             if (event.getComponentId().equals("changeImage")) {
@@ -93,6 +100,7 @@ public class Forbidden extends Command {
                     }
                 } catch (Exception e) {
                     e.printStackTrace();
+                    //event.reply("Wrong name mate! Retry!").queue();
                 }
             }
         }
