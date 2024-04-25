@@ -1,3 +1,3 @@
 asa bot
 
-![alt text](https://imgur.com/a/uj1GFxr)
+![alt text](https://i.imgur.com/ofQIlrt.png)
