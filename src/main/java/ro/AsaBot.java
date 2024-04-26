@@ -69,6 +69,9 @@ public class AsaBot {
                         new AsaCmd(),
                         new MakimaCmd(),
                         new PowerCmd(),
+                        new MarinCmd(),
+                        new MaisanCmd(),
+                        new FutabaCmd(),
                         new Forbidden(bot),
 
                         new PlayCmd(bot),
