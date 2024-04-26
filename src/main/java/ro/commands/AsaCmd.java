@@ -24,7 +24,9 @@ public class AsaCmd extends Command {
         ImageBoard.setUserAgent("Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:52.0) Gecko/20100101 Firefox/52.0");
         try {
             imgBoard.search(MAX_LIMIT, "mitaka_asa").async(images -> {
-                event.reply(images.get(new Random().nextInt(images.size())).getURL());
+                String imgURL = images.get(new Random().nextInt(images.size())).getURL();
+                System.out.println(imgURL);
+                event.reply(imgURL);
             });
         } catch (Exception e) {
             e.printStackTrace();
