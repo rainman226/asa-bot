@@ -3,6 +3,7 @@ package ro;
 import com.jagrosh.jdautilities.commons.waiter.EventWaiter;
 import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.entities.Guild;
+import ro.music.audio.AloneInVoiceHandler;
 import ro.music.audio.NowPlayingHandler;
 import ro.music.audio.PlayerManager;
 import ro.music.playlist.PlaylistLoader;
@@ -18,6 +19,7 @@ public class Bot {
     private final PlayerManager players;
     private final PlaylistLoader playlists;
     private final NowPlayingHandler nowplaying;
+    private final AloneInVoiceHandler aloneInVoiceHandler;
 
     private JDA jda;
 
@@ -30,6 +32,8 @@ public class Bot {
         this.playlists = new PlaylistLoader();
         this.nowplaying = new NowPlayingHandler(this);
         this.nowplaying.init();
+        this.aloneInVoiceHandler = new AloneInVoiceHandler(this);
+        this.aloneInVoiceHandler.init();
     }
 
     public EventWaiter getWaiter() {
