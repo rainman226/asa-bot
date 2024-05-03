@@ -8,6 +8,7 @@ import ro.services.OriconService;
 
 import java.io.IOException;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 public class OriconCmd extends Command {
@@ -15,13 +16,14 @@ public class OriconCmd extends Command {
 
     public OriconCmd() {
         this.name = "oricon";
-        this.help = "Get the Oricon chart for a specific category, year, and month";
+        this.help = "Get the Oricon chart for a specific category (albums, daily, leave blank for weekly)";
         this.arguments = "<category>";
         this.guildOnly = false;
     }
 
     protected void execute(CommandEvent event) {
         LocalDate currentDate = LocalDate.now();
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
         int year = currentDate.getYear();
         int month = currentDate.getMonthValue();
         //System.out.println("Daily Singles Rankings:\n" + service.getDailySinglesRankings(year, month));
@@ -31,6 +33,9 @@ public class OriconCmd extends Command {
             if (event.getArgs().equals("albums")) {
                 entries = service.getWeeklyAlbumsRankings(year, month);
             }
+            else if(event.getArgs().equals("daily")) {
+                entries = service.getDailySinglesRankings();
+            }
             else {
                 entries = service.getWeeklySinglesRankings(year, month);
             }
@@ -38,7 +43,17 @@ public class OriconCmd extends Command {
             throw new RuntimeException(e);
         }
         EmbedBuilder embedBuilder = new EmbedBuilder();
-        embedBuilder.setTitle("Oricon Weekly Singles Rankings");
+        switch (event.getArgs()) {
+            case "albums":
+                embedBuilder.setTitle("Weekly Albums Rankings");
+                break;
+            case "daily":
+                embedBuilder.setTitle("Daily Singles Rankings (" + currentDate.format(formatter) + ")");
+                break;
+            default:
+                embedBuilder.setTitle("Weekly Singles Rankings");
+                break;
+        }
 
         for (int i = 0; i < entries.size(); i++) {
             OriconService.Entry entry = entries.get(i);
