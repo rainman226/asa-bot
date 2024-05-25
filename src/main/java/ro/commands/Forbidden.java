@@ -42,22 +42,35 @@ public class Forbidden extends Command {
 
     protected void execute(CommandEvent event) {
         try {
-            List<JCM.Person> searchResults = search(URLEncoder.encode(event.getArgs(), "UTF-8"));
+            List<JCM.Person> searchResults = search(URLEncoder.encode(event.getArgs(), "UTF-8"), true);
             List<String> images = getImages(searchResults.get(0));
 
             if (!images.isEmpty()) {
                 String initialImageUrl = images.get(0);
                 sendInitialMessage(event.getChannel(), initialImageUrl, images);
             }
-        } catch (Exception e) {
+        } catch (IllegalStateException e){
+            try {
+                List<JCM.Person> searchResults = search(URLEncoder.encode(event.getArgs(), "UTF-8"), false);
+                List<String> images = getImages(searchResults.get(0));
+
+                if (!images.isEmpty()) {
+                    String initialImageUrl = images.get(0);
+                    sendInitialMessage(event.getChannel(), initialImageUrl, images);
+                }
+            } catch (Exception ex) {
+                event.reply("Wrong name mate! Retry!");
+            }
+        }
+        catch (Exception e) {
             e.printStackTrace();
-            event.reply("Wrong name mate! Retry!");
+            //event.reply("Wrong name mate! Retry!");
         }
     }
 
     private void sendInitialMessage(MessageChannel channel, String imageUrl, List<String> images) {
         EmbedBuilder embedBuilder = new EmbedBuilder();
-        embedBuilder.setTitle("Initial Image");
+        //embedBuilder.setTitle("Initial Image");
         embedBuilder.setImage(imageUrl);
 
         Button button = Button.primary("changeImage", "Reroll");
@@ -107,7 +120,7 @@ public class Forbidden extends Command {
 
         private void editMessage(Message message, String newImageUrl) {
             EmbedBuilder embedBuilder = new EmbedBuilder();
-            embedBuilder.setTitle("New Image");
+            //embedBuilder.setTitle("New Image");
             embedBuilder.setImage(newImageUrl);
 
             MessageEditData editData = new MessageEditBuilder()
