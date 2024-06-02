@@ -44,9 +44,8 @@ public class Forbidden extends Command {
         try {
             List<JCM.Person> searchResults = search(URLEncoder.encode(event.getArgs(), "UTF-8"), true);
             List<String> images = getImages(searchResults.get(0));
-
             if (!images.isEmpty()) {
-                String initialImageUrl = images.get(0);
+                String initialImageUrl = images.get(images.size() - 1);
                 sendInitialMessage(event.getChannel(), initialImageUrl, images);
             }
         } catch (IllegalStateException e){
@@ -55,7 +54,7 @@ public class Forbidden extends Command {
                 List<String> images = getImages(searchResults.get(0));
 
                 if (!images.isEmpty()) {
-                    String initialImageUrl = images.get(0);
+                    String initialImageUrl = images.get(images.size() - 1);
                     sendInitialMessage(event.getChannel(), initialImageUrl, images);
                 }
             } catch (Exception ex) {

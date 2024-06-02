@@ -94,7 +94,7 @@ public class OriconService {
     public List<Entry> getDailySinglesRankings() throws IOException {
         LocalDate today = LocalDate.now().minusDays(1); // Subtract one day
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-        String url = "https://www.oricon.co.jp/rank/js/d/" + today.format(formatter) + "/";
+        String url = "https://www.oricon.co.jp/rank/dis/d/" + today.format(formatter) + "/";
         Document doc = Jsoup.connect(url).get();
 
         List<Entry> entries = new ArrayList<>();
